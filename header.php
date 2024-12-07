@@ -26,7 +26,7 @@
                         <a class="nav-link" href="#">Tin tức</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="views/admin/login.php">Đăng nhập Admin</a>
+                        <a class="nav-link" href="../admin/login.php">Đăng nhập Admin</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search" method="GET" action="index.php">

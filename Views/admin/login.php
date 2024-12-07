@@ -1,4 +1,32 @@
+<?php
+session_start();
+require_once '../../Database.php'; // Đảm bảo đường dẫn đến Database.php là chính xác
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Kết nối đến cơ sở dữ liệu
+    $db = Database::connect();
+
+    // Truy vấn để lấy thông tin người dùng
+    $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Kiểm tra mật khẩu
+    if ($user && $password === $user['password']) {
+        // Đăng nhập thành công
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        header("Location: dashboard.php"); // Chuyển hướng đến trang dashboard
+        exit();
+    } else {
+        // Đăng nhập thất bại
+        $error = "Tên đăng nhập hoặc mật khẩu không đúng.";
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
