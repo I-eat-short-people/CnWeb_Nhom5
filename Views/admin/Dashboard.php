@@ -1,4 +1,17 @@
 
+<?php
+session_start();
+require_once '../../../Database.php'; // Đảm bảo đường dẫn đến Database.php là chính xác
+
+// Kiểm tra xem người dùng đã đăng nhập chưa
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$db = Database::connect();
+$newsList = $db->query("SELECT * FROM news ORDER BY created_at DESC")->fetchAll(PDO::FETCH_ASSOC);
+?>
 
 <!DOCTYPE html>
 <html lang="vi">
