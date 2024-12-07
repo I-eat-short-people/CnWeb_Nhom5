@@ -31,7 +31,7 @@ $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="card-body">
                             <h5 class="card-title"><?= htmlspecialchars($item['title']) ?></h5>
                             <p class="card-text"><?= htmlspecialchars(substr($item['content'], 0, 100)) ?>...</p>
-                            <a href="..views/news/detail.php?id=<?= $item['id'] ?>" class="btn btn-primary">Đọc tiếp</a>
+                            <a href="../news/detail.php?id=<?= $item['id'] ?>" class="btn btn-primary">Đọc tiếp</a>
                         </div>
                     </div>
                 </div>
