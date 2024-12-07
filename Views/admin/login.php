@@ -26,6 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Tên đăng nhập hoặc mật khẩu không đúng.";
     }
 }
+function checkAdmin() {
+    session_start();
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: login'); // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
