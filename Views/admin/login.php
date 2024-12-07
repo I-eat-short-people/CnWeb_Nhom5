@@ -1,40 +1,3 @@
-<?php
-session_start();
-require_once '../../Database.php'; // Đảm bảo đường dẫn đến Database.php là chính xác
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    // Kết nối đến cơ sở dữ liệu
-    $db = Database::connect();
-
-    // Truy vấn để lấy thông tin người dùng
-    $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->execute([$username]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // Kiểm tra mật khẩu
-    if ($user && $password === $user['password']) {
-        // Đăng nhập thành công
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        header("Location: dashboard.php"); // Chuyển hướng đến trang dashboard
-        exit();
-    } else {
-        // Đăng nhập thất bại
-        $error = "Tên đăng nhập hoặc mật khẩu không đúng.";
-    }
-}
-function checkAdmin() {
-    session_start();
-    if (!isset($_SESSION['user_id'])) {
-        header('Location: login'); // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
-        exit;
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,25 +8,18 @@ function checkAdmin() {
 </head>
 <body>
     <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <h2 class="text-center">Đăng Nhập</h2>
-                <?php if (isset($error)): ?>
-                    <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-                <?php endif; ?>
-                <form action="login.php" method="POST">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
-                </form>
+        <h2 class ="text-center">Đăng Nhập Quản Trị</h2>
+        <form action="login.php" method="POST">
+            <div class="mb-3">
+                <label for="username" class="form-label">Tên đăng nhập</label>
+                <input type="text" class="form-control" id="username" name="username" required>
             </div>
-        </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+        </form>
     </div>
 </body>
 </html>
