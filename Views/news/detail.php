@@ -39,7 +39,7 @@ if ($id > 0) {
             <div class="content">
                 <p><?= nl2br(htmlspecialchars($news['content'])) ?></p>
             </div>
-            <a href="index.php?controller=home&action=index" class="btn btn-secondary mt-3">Quay lại</a>
+            <a href="../home/index.php" class="btn btn-secondary mt-3">Quay lại</a>
         <?php else: ?>
             <div class="alert alert-danger">
                 <h4>Không tìm thấy bài viết!</h4>
