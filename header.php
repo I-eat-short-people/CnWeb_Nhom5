@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="CnWeb_Nhom5/index.php">Trang chủ</a>
+                        <a class="nav-link active" aria-current="page" href="../../index.php">Trang chủ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Tin tức</a>
